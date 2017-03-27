@@ -2,52 +2,53 @@
 
 {% block body %}
     <div style="width: 100%; background-color: black; color: white; font-size: 16px; font-weight: bold; padding: 3px">
-        [ GAME TRAC ]
+        [ GAME TRAC ] <span style="font-size: 10px">pile of shame</span>
     </div>
-    {{ form_start(form) }}
-    <table>
-        <tr>
-            <td>Name</td>
-            <td style="padding-left: 10px">{{ form_row(form.name) }}</td>
-            <td style="padding-left: 10px"></td>
-        </tr>
-        <tr>
-            <td>Platform</td>
-            <td style="padding-left: 10px">{{ form_row(form.platform) }}</td>
-            <td style="padding-left: 10px">{{ form_row(form.save) }}</td>
-        </tr>
-    </table>
-    {{ form_end(form) }}
-
-    <table class="table-striped" width="100%" style="margin-top: 20px">
-        <tr>
-            <th>Name</th>
-            <th>Platform</th>
-            <th>zuletzt gespielt</th>
-            <th></th>
-        </tr>
-        {% for game in games %}
-            <tr {% if game.isFinished %} style="background-color: #c9e7bc" {% elseif game.isDropped %} style="background-color: #ffc2c9" {% endif %}>
-                <td>{{ game.name }}</td>
-                <td>{{ game.platform }}</td>
-                <td>{{ game.lastPlayed.format('d.m.Y') }}</td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <a href="/playedtoday/{{ game.id }}">heute gespielt</a>
-                            </td>
-                            <td style="padding-left: 15px">
-                                <a href="/drop/{{ game.id }}">drop</a>
-                            </td>
-                            <td style="padding-left: 15px">
-                                <a href="/finish/{{ game.id }}">fertig</a>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
+    <div style="width: 100%; padding: 10px">
+        {{ form_start(form) }}
+        <table>
+            <tr>
+                <td>Name</td>
+                <td style="padding-left: 10px">{{ form_row(form.name) }}</td>
+                <td style="padding-left: 10px"></td>
             </tr>
-        {% endfor %}
-    </table>
+            <tr>
+                <td>Platform</td>
+                <td style="padding-left: 10px">{{ form_row(form.platform) }}</td>
+                <td style="padding-left: 10px">{{ form_row(form.save) }}</td>
+            </tr>
+        </table>
+        {{ form_end(form) }}
 
+        <table class="table-striped" width="100%" style="margin-top: 20px">
+            <tr>
+                <th style="padding: 2px">Name</th>
+                <th style="padding: 2px">Platform</th>
+                <th style="padding: 2px">zuletzt gespielt</th>
+                <th style="padding: 2px"></th>
+            </tr>
+            {% for game in games %}
+                <tr {% if game.isFinished %} style="background-color: #c9e7bc" {% elseif game.isDropped %} style="background-color: #ffc2c9" {% endif %}>
+                    <td style="padding: 2px">{{ game.name }}</td>
+                    <td style="padding: 2px">{{ game.platform }}</td>
+                    <td style="padding: 2px">{{ game.lastPlayed.format('d.m.Y') }}</td>
+                    <td style="padding: 2px">
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="/playedtoday/{{ game.id }}">heute gespielt</a>
+                                </td>
+                                <td style="padding-left: 15px">
+                                    <a href="/drop/{{ game.id }}">drop</a>
+                                </td>
+                                <td style="padding-left: 15px">
+                                    <a href="/finish/{{ game.id }}">fertig</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
